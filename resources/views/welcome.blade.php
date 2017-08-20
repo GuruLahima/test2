@@ -89,7 +89,7 @@
                         <ul>
                             @foreach ($allProjects as $oneProject)
                                 {{$oneProject->project_name}}
-                                <form action="{{url('/projects/'.$oneProject->id)}}">
+                                <form action="{{url('/projects/'.$oneProject->id.'/equipment')}}">
                                     <input formmethod="GET" type="submit" value="See project equipment"/>
                                 </form>
                             @endforeach

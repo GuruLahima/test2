@@ -10,5 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::delete('projects/customDestroy/{projectId}/{equipmentId}', 'ProjectController@customDestroy');
 Route::resource('/projects', 'ProjectController');
+Route::resource('/projects/{project}/equipment', 'EquipmentController');

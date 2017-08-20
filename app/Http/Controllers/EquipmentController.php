@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Project;
+use App\Equipment;
+
 class EquipmentController extends Controller
 {
     /**
@@ -11,9 +14,12 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+        $this->data['equipmentList'] = Project::find($project->id)->equipments; 
+        $this->data['project_id'] = $project->id;
+
+        return view('equipments', $this->data);
     }
 
     /**
@@ -32,9 +38,16 @@ class EquipmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($project_id, Request $request)
     {
-        //
+        // dd($project_id);
+
+        $equipment = new Equipment($request->all());
+        $equipment->project_id = $project_id;
+
+        $equipment->save();       
+
+        return redirect('projects/'.$project_id.'/equipment');
     }
 
     /**
@@ -77,8 +90,11 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($project_id, $equipment_id)
     {
-        //
+        $currentProjectID = Equipment::find($equipment_id)->project_id;
+        Equipment::find( $equipment_id)->delete();
+
+        return redirect('projects/'.$project_id.'/equipment');
     }
 }

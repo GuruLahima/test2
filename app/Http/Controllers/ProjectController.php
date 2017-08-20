@@ -38,14 +38,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $equipment = new Equipment($request->all());
 
-        #SECURIY CONCERN! I use hidden input in the equipment view to pass project_id to this action.
-
-        $equipment->save();       
-
-        return redirect('/projects');
     }
 
     /**
@@ -56,13 +49,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
-        #echo Project::find($project->id)->equipments;
-        #Project::with('Equipment')->find($project->id)
-        $this->data['equipmentList'] = Project::find($project->id)->equipments;
-        $this->data['project_id'] = $project->id;
 
-        return view('equipments', $this->data);
         
     }
 
@@ -97,17 +84,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project, $equipment_id)
     {
-        //
-        #echo $equipment_id;
-        #Project::find($project->id)->delete();
 
-        #return redirect('/projects');
-    }
-
-    public function customDestroy($project_id, $equipment_id)
-    {
-        Equipment::find($equipment_id)->delete();
-
-        return redirect('/projects');
     }
 }
