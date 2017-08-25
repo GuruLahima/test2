@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipment extends Model
 {
-	protected $fillable = array('project_id', 'tools');
+	protected $fillable = array('tools', 'subcategory_id');
 
 	protected $table = 'equipment';
     //
     // DEFINE RELATIONSHIPS --------------------------------------------------
     // each equipment belongs to one project
-    public function project() {
-        return $this->belongsTo(Project::class); // this matches the Eloquent model
+
+    //each equipment belongs to one subcategory
+     public function subcategory() {
+        return $this->belongsTo(Subcategory::class, 'subcategory_id'); 
     }
 }

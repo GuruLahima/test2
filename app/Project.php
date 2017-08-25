@@ -12,7 +12,8 @@ class Project extends Model
     //
     // DEFINE RELATIONSHIPS --------------------------------------------------
     // each project HAS many equipments
-    public function equipments() {
-        return $this->hasMany(Equipment::class); // this matches the Eloquent model
-    }
+	public function categories()
+	    {
+	    	return $this->hasMany(Category::class, 'project_id');
+	    }    
 }

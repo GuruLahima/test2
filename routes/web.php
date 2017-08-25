@@ -12,3 +12,5 @@
 */
 Route::resource('/projects', 'ProjectController');
 Route::resource('/projects/{project}/equipment', 'EquipmentController');
+Route::resource('/projects/{project}/category', 'CategoryController');
+Route::resource('/projects/{project}/subcategory', 'SubcategoryController');

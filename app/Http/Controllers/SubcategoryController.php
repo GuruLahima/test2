@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\Subcategory;
 use Illuminate\Http\Request;
-use App\Equipment;
+use App\Category;
 
-class ProjectController extends Controller
+class SubcategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $this->data['allProjects'] = Project::all();
-
-        return view('welcome', $this->data);
+        $this->data['categories'] = Category::where('project_id', $id)->get();
+        return view('newsubcategory', $this->data);
     }
 
     /**
@@ -28,7 +27,6 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('newproject');
     }
 
     /**
@@ -37,31 +35,32 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($project_id ,Request $request)
     {
-        Project::create($request->all());
+        //
+        Subcategory::create($request->all());
 
-        return redirect('/projects');
+        return redirect('/projects/'.$project_id.'/equipment');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Subcategory $subcategory)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Subcategory $subcategory)
     {
         //
     }
@@ -70,10 +69,10 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Subcategory $subcategory)
     {
         //
     }
@@ -81,11 +80,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, $equipment_id)
+    public function destroy(Subcategory $subcategory)
     {
-
+        //
     }
 }

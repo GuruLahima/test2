@@ -87,6 +87,7 @@
                     <br>
                     <div style="font-size: 24px">
                         <ul>
+                        
                             @foreach ($allProjects as $oneProject)
                                 {{$oneProject->project_name}}
                                 <form action="{{url('/projects/'.$oneProject->id.'/equipment')}}">
@@ -100,11 +101,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{url('/projects/create')}}">Create new project</a>
                 </div>
             </div>
         </div>

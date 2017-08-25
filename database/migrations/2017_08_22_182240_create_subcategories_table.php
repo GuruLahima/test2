@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEquipmentTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateEquipmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipment', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('subcategory_id');
-            $table->string('tools');
+            $table->integer('category_id');
+            $table->string('name');
             $table->timestamps();
         });
     }
-
-
 
     /**
      * Reverse the migrations.
@@ -30,6 +28,6 @@ class CreateEquipmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipment');
+        Schema::dropIfExists('subcategories');
     }
 }

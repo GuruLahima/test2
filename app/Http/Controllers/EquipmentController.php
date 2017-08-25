@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Project;
 use App\Equipment;
+use App\Category;
+use App\Subcategory;
 
 class EquipmentController extends Controller
 {
@@ -14,11 +16,9 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project)
+    public function index($id)
     {
-        $this->data['equipmentList'] = Project::find($project->id)->equipments; 
-        $this->data['project_id'] = $project->id;
-
+        $this->data['equipment'] = Category::where('project_id', $id)->with('subcategories', 'subcategories.equipment')->get();        
         return view('equipments', $this->data);
     }
 
@@ -42,10 +42,7 @@ class EquipmentController extends Controller
     {
         // dd($project_id);
 
-        $equipment = new Equipment($request->all());
-        $equipment->project_id = $project_id;
-
-        $equipment->save();       
+        Equipment::create($request->all());
 
         return redirect('projects/'.$project_id.'/equipment');
     }

@@ -4,12 +4,24 @@
 		"selected_items":
 		[
 			[
+				"equ",
+				"equipmentList"
+			],
+			[
+				"sub",
+				"subcategoryList"
+			],
+			[
+				"categ",
+				"categoryList"
+			],
+			[
 				"equi",
-				"equipment_id"
+				"equipmentList"
 			],
 			[
 				"eq",
-				"equipment_id"
+				"equipmentList"
 			],
 			[
 				"project",
@@ -48,19 +60,29 @@
 	"buffers":
 	[
 		{
-			"file": "routes/web.php",
+			"file": "app/Http/Controllers/ProjectController.php",
 			"settings":
 			{
-				"buffer_size": 542,
-				"encoding": "UTF-8",
+				"buffer_size": 1736,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/Controllers/ProjectController.php",
+			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 2568,
+				"buffer_size": 513,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\n\nuse App\\Project;\nuse App\\Equipment;\nuse App\\Category;\nuse App\\Subcategory;\n\nclass EquipmentController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function index(Project $project)\n    {\n        $equipmentList = Project::find($project->id)->equipments; \n\n        $categoryList = [];\n        $subcategoryList = [];\n\n        // dd($equipmentList);\n\n        foreach($equipmentList as $equipment){\n            array_push($categoryList, $equipment->subcategory);\n            // array_push($subcategoryList, $equipment->subcategory->category);\n        }\n\n        $this->data['categoryList'] = $categoryList;\n        $this->data['subcategoryList'] = $subcategoryList;\n        $this->data['equipmentList'] = $equipmentList;\n        $this->data['project_id'] = $project->id;\n\n        return view('equipments', $this->data);\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function store($project_id, Request $request)\n    {\n        // dd($project_id);\n\n        $equipment = new Equipment($request->all());\n        $equipment->project_id = $project_id;\n        $subcategory->\n\n        $equipment->save();       \n\n        return redirect('projects/'.$project_id.'/equipment');\n    }\n\n    /**\n     * Display the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function show($id)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function edit($id)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function update(Request $request, $id)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function destroy($project_id, $equipment_id)\n    {\n        $currentProjectID = Equipment::find($equipment_id)->project_id;\n        Equipment::find( $equipment_id)->delete();\n\n        return redirect('projects/'.$project_id.'/equipment');\n    }\n}\n",
+			"file": "app/Http/Controllers/EquipmentController.php",
+			"file_size": 2650,
+			"file_write_time": 131479125147054148,
+			"settings":
+			{
+				"buffer_size": 2673,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -69,7 +91,7 @@
 			"file": "resources/views/equipments.blade.php",
 			"settings":
 			{
-				"buffer_size": 732,
+				"buffer_size": 976,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -78,7 +100,7 @@
 			"file": "resources/views/welcome.blade.php",
 			"settings":
 			{
-				"buffer_size": 3453,
+				"buffer_size": 3491,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -93,19 +115,28 @@
 			}
 		},
 		{
-			"file": "database/migrations/2017_08_13_110848_create_projects_table.php",
+			"file": "app/Equipment.php",
 			"settings":
 			{
-				"buffer_size": 675,
+				"buffer_size": 602,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Equipment.php",
+			"file": "app/Subcategory.php",
 			"settings":
 			{
-				"buffer_size": 438,
+				"buffer_size": 608,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Category.php",
+			"settings":
+			{
+				"buffer_size": 519,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -114,7 +145,7 @@
 			"file": "database/migrations/2017_08_13_122341_create_equipment_table.php",
 			"settings":
 			{
-				"buffer_size": 678,
+				"buffer_size": 794,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -160,6 +191,7 @@
 	},
 	"expanded_folders":
 	[
+		"/C/wamp/www/test2",
 		"/C/wamp/www/test2/app",
 		"/C/wamp/www/test2/app/Http",
 		"/C/wamp/www/test2/app/Http/Controllers",
@@ -172,6 +204,17 @@
 	],
 	"file_history":
 	[
+		"/C/wamp/www/test2/app/Http/Controllers/SubcategoryController.php",
+		"/C/wamp/www/test2/database/migrations/2017_08_22_182240_create_subcategories_table.php",
+		"/C/wamp/www/test2/database/migrations/2017_08_13_122341_create_equipment_table.php",
+		"/C/wamp/www/test2/database/migrations/2017_08_22_173653_create_categories_table.php",
+		"/C/wamp/www/test2/resources/views/equipments.blade.php",
+		"/C/wamp/www/test2/resources/views/welcome.blade.php",
+		"/C/wamp/www/test2/app/Http/Controllers/CategoryController.php",
+		"/C/wamp/www/test2/app/Http/Controllers/EquipmentController.php",
+		"/C/wamp/www/test2/app/Http/Controllers/ProjectController.php",
+		"/C/wamp/www/test2/routes/web.php",
+		"/C/wamp/www/test2/database/migrations/2017_08_13_110848_create_projects_table.php",
 		"/C/wamp/www/test2/.env",
 		"/C/wamp/www/test/resources/views/welcome.blade.php",
 		"/C/wamp/www/test/resources/views/posts/post.blade.php",
@@ -201,7 +244,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -215,6 +258,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"categoryList",
+			"equipmentList",
+			"Equipment",
+			"project_id",
+			"::",
+			"equipment",
+			"projects",
+			"/');",
+			"equipment",
+			" ;",
+			"Blueprint",
+			"table",
+			"function",
+			"project_id",
 			"()}}\n"
 		],
 		"highlight": true,
@@ -233,52 +290,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "routes/web.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 542,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								475,
-								488
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "app/Http/Controllers/ProjectController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2568,
+						"buffer_size": 1736,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2521,
-								2521
+								0,
+								0
 							]
 						],
 						"settings":
@@ -288,36 +317,65 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1125.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "resources/views/equipments.blade.php",
+					"buffer": 1,
+					"file": "routes/web.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 732,
+						"buffer_size": 513,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								221,
-								221
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"_anf_new": "",
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Http/Controllers/EquipmentController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1528,
+								1528
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -325,19 +383,48 @@
 				},
 				{
 					"buffer": 3,
-					"file": "resources/views/welcome.blade.php",
+					"file": "resources/views/equipments.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3453,
+						"buffer_size": 976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2849,
-								2849
+								942,
+								942
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/views/welcome.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2847,
+								2847
 							]
 						],
 						"settings":
@@ -347,14 +434,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1121.0,
+						"translation.y": 945.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "app/Project.php",
 					"semi_transient": false,
 					"settings":
@@ -366,43 +453,13 @@
 						"selection":
 						[
 							[
-								180,
-								94
+								431,
+								431
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "database/migrations/2017_08_13_110848_create_projects_table.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 675,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								675,
-								675
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -417,15 +474,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 438,
+						"buffer_size": 602,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								180,
-								180
+								163,
+								163
 							]
 						],
 						"settings":
@@ -436,24 +493,80 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "database/migrations/2017_08_13_122341_create_equipment_table.php",
+					"file": "app/Subcategory.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 678,
+						"buffer_size": 608,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								677,
-								677
+								608,
+								608
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/Category.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 519,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								516,
+								516
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "database/migrations/2017_08_13_122341_create_equipment_table.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								429,
+								429
 							]
 						],
 						"settings":
@@ -466,7 +579,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -520,6 +633,22 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"equpb",
+				"resources\\views\\equipments.blade.php"
+			],
+			[
+				"ec",
+				"app\\Http\\Controllers\\EquipmentController.php"
+			],
+			[
+				"web",
+				"routes\\web.php"
+			],
+			[
+				"welcome",
+				"resources\\views\\welcome.blade.php"
+			]
 		],
 		"width": 0.0
 	},
@@ -549,7 +678,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 393.0,
+	"side_bar_width": 320.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

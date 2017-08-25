@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\Category;
 use Illuminate\Http\Request;
-use App\Equipment;
 
-class ProjectController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $this->data['allProjects'] = Project::all();
-
-        return view('welcome', $this->data);
+        //
+        return view('newcategory');
     }
 
     /**
@@ -28,7 +26,6 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('newproject');
     }
 
     /**
@@ -37,31 +34,32 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($project_id, Request $request)
     {
-        Project::create($request->all());
+        //
+        Category::create($request->all());
 
-        return redirect('/projects');
+        return redirect('/projects/'.$project_id.'/equipment');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Category $category)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Category $category)
     {
         //
     }
@@ -70,10 +68,10 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -81,11 +79,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, $equipment_id)
+    public function destroy(Category $category)
     {
-
+        //
     }
 }
